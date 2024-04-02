@@ -1,0 +1,198 @@
+// colors
+$cr-white: hsl(0, 0%, 100%)
+$cr-blue-1: hsl(120, 100%, 54%)
+$cr-transparent-2: hsl(0, 0, 0, 0.0) // Transparente
+$cr-blue-3: hsl(0, 0, 0, 0.0) 
+
+// subtle colors
+$cr-blue-500a: hsla(0, 0%, 0%, 0.5)
+
+// gradients
+$gradient-lin-1: linear-gradient(to right, transparent, $cr-blue-1)
+$gradient-lin-2: linear-gradient(to right, $cr-blue-1, transparent)
+$gradient-lin-3: linear-gradient(to bottom, $cr-blue-1, transparent)
+$gradient-lin-4: linear-gradient(to bottom, transparent, $cr-blue-1)
+
+// components
+$page_cr: $cr-white
+$page_bd-cr: $cr-blue-3
+
+$card_cr: $cr-white
+$card_bd-cr: $cr-transparent-2
+$card__line_bd-cr: $cr-blue-1
+
+// reset
+*,
+*::before,
+*::after
+  // position
+  margin: 0
+
+  // size
+  padding: 0
+
+  box:
+    sizing: border-box
+
+.page
+  // color
+  color: $page_cr
+  overflow: hidden // Previne overflow indesejado
+  background-repeat: no-repeat // Impede a repetição do background
+  min-height: 100% // Altura mínima para cobrir o viewport
+
+  background:
+    color: $page_bd-cr
+  
+  // grid
+  display: grid
+  
+  grid:
+    template:
+      areas: "main"
+  
+  // size
+  padding: 2em
+  
+  min:
+    height: 100%
+      
+  &__main
+    // grid
+    grid:
+      area: main
+
+.main
+  // grid
+  display: grid
+  
+  align:
+    items: right
+    
+  &__card
+    // position
+    margin:
+      inline: auto
+    
+    // size
+    max:
+      width: 12%
+
+.card
+  $anim-duration: 5s
+  $line-thicknes: 0.2em
+  
+  color: $card_cr
+  position: relative
+  right: 2%
+  bottom: 7%
+
+  background:
+    color: $card_bd-cr
+  
+  // position
+  position: absolute
+    
+  // size
+  width: 100%
+  
+  aspect:
+    ratio: 1 / 1.5
+    
+  // visual
+  overflow: hidden
+  
+  box:
+    shadow: 0 0 2em $cr-blue-500a
+    
+  &__line
+    // position
+    position: absolute
+    
+    animation: 1s 1s linear infinite
+    
+    &_left
+      // animation
+      animation:
+        name: to-top
+      
+      // color
+      background: $gradient-lin-3
+      
+      // position
+      left: 0
+      bottom: -100%
+      
+      // size
+      width: $line-thicknes
+      height: 100%
+      
+    &_right
+      // animation
+      animation:
+        name: to-bottom
+      
+      // color
+      background: $gradient-lin-4
+      
+      // position
+      right: 0
+      top: -100%
+      
+      // size
+      width: $line-thicknes
+      height: 100%
+      
+    &_top
+      // animation
+      animation:
+        delay: 1.5s
+        name: to-right
+        
+      // color
+      background: $gradient-lin-1
+      
+      // size
+      width: 100%
+      height: $line-thicknes
+      
+      // position
+      top: 0
+      left: -100%
+      
+    &_bottom
+      // animation
+      animation:
+        delay: 1.5s
+        name: to-left
+        
+      // color
+      background: $gradient-lin-2
+      
+      // position
+      bottom: 0
+      right: -100%
+      
+      // size
+      width: 100%
+      height: $line-thicknes
+      
+@keyframes to-top
+  to
+    // position
+    bottom: 200%
+    
+@keyframes to-bottom
+  to
+    // position
+    top: 200%
+    
+@keyframes to-left
+  to
+    // position
+    right: 200%
+    
+@keyframes to-right
+  to
+    // position
+    left: 200%
